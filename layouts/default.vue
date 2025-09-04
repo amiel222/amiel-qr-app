@@ -109,14 +109,9 @@ export default {
         },
         {
           icon: 'mdi-scanner',
-          title: 'scanner',
-          to: '/scanner'
+          title: 'qrscanner',
+          to: '/qrscanner'
         },
-        {
-          icon: 'mdi-login',
-          title: 'Signin',
-          to: '/Signin'
-        }
       ],
       miniVariant: false,
       right: true,
