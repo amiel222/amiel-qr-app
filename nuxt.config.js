@@ -6,8 +6,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - El',
-    title: 'El',
+    titleTemplate: '%s - bsit3b-qr-app',
+    title: 'bsit3b-qr-app',
     htmlAttrs: {
       lang: 'en'
     },
@@ -28,6 +28,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/html5-qrcode.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -44,9 +45,34 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next'
   ],
-  
-   auth: {
-    // Options
+
+  auth: {
+    redirect:{
+      login: '/auth/signin',
+      logout: '/auth/signin',
+      callback: '/auth/callback',
+      home: '/'
+    },
+    autoFetchUser: false,
+    strategies: {
+      google: {
+       clientId: '80461347620-b7j2ualbggiflc3rtjdojvu9bb2a8igq.apps.googleusercontent.com',
+       scheme: "oauth2",
+       endpoints:{
+        authorization: "https://accounts.google.com/o/oauth2/auth",
+        userInfo: "https://www.googleapis.com/oauth2/v3/userinfo",
+       },
+       token:{
+        property: "access_token",
+        type: "Bearer",
+        maxAge: 1800,
+       },
+       responseType: "token id_token",
+       scope: ["openid", "profile", "email"],
+       redirectUri: process.env.REDIRECT_URI,
+       codeChallengeMethod: "",
+      },
+    },
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

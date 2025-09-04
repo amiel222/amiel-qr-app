@@ -1,53 +1,64 @@
 <template>
-    <div class="d-flex align-center justify-center" style="height: 100vh;">
-       <v-card width="400" class="card-outlined px-8 py-10 text-center">
-        <h1 class="text-center my-6 hr-sect mb-8">Logi Page</h1>
-        <v-form>
-            <v-text-field
-             label="Username"
-             outlined
-             rounded 
-             prepend-inner-icon="mdi-email"
-             ></v-text-field>
-            <v-text-field 
-             label="Password"
-             rounded
-             outlined type="password" 
-             prepend-inner-icon="mdi-lock"
-             ></v-text-field>
+  <div class="d-flex align-center justify-center" style="height: 100vh;">
+    <v-card width="500">
+      <h1 class="text-center my-6">Sign In</h1>
 
-            <v-btn color="primary" class="text capitalize" rounded block>Login</v-btn>
-            <div class="hr-sect my-5">OR</div>
-            <v-btn color="error" class="text-capitalize" rounded block><v-icon left>mdi-google</v-icon> Sign in with google</v-btn>
-        </v-form>
-        </v-card>
-    </div>
+      <v-card-text>
+        <v-text-field
+          outlined
+          label="Username"
+          prepend-inner-icon="mdi-email-outline"
+          variant="outlined"
+          single-line
+        ></v-text-field>
+
+        <v-text-field
+          outlined
+          label="Password"
+          prepend-inner-icon="mdi-lock-outline"
+          type="password"
+          variant="outlined"
+          single-line
+        ></v-text-field>
+
+        <v-btn
+          class="text-none mb-4"
+          color="primary"
+          size="x-large"
+          variant="flat"
+          block
+        >
+          Login
+        </v-btn>
+
+        <div class="text-center my-4">
+          <span>OR</span>
+        </div>
+
+        <v-btn
+          @click="signinWithGoogle()"
+          class="text-none mb-4"
+          color="red darken-1"
+          size="x-large"
+          variant="flat"
+          block
+        >
+          <v-icon left>mdi-google</v-icon>Sign in with Google.
+        </v-btn>
+        
+      </v-card-text>
+    </v-card>
+  </div>
 </template>
+
 <script>
 export default {
-    layout: "auth"
+  layout: "auth",
+  middleware: "guest",
+  methods:{
+    signinWithGoogle(){
+      this.$auth.loginWith('google')
+    }
+  }
 }
 </script>
-<style scoped>
-.hr-sect{
-    display: flex;
-    flex-basis: 100%;
-    align-items: center;
-    /* color: rgba(0, 0, 0, 0.9); */
-    margin:8px 0;
-}
-
-.hr-sect::before,
-.hr-sect::after{
-    content:"";
-    flex-grow: 1;
-    background: rgba(255, 255,255, 0.15);
-    height: 1px;
-    font-size: 0;
-    line-height: 0;
-    margin: 0 8px;
-}
-.card-outline {
-    border-radius: 20px;
-}
-</style>
